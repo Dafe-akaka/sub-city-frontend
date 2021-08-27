@@ -1,11 +1,8 @@
 import * as React from "react";
-import {
-  ChakraProvider,
-  Box,
-} from "@chakra-ui/react";
+import { ChakraProvider, Box } from "@chakra-ui/react";
 
 export const App = () => (
-  <ChakraProvider >
+  <ChakraProvider>
     <Box textAlign="center" fontSize="xl">
       hello world
     </Box>
