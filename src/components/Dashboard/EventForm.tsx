@@ -4,7 +4,7 @@ import {
   FormLabel,
   Textarea,
   Text,
-  Stack,
+  HStack,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
@@ -27,13 +27,23 @@ export default function EventForm() {
     >
       <Box boxShadow="dark-lg" p="10" rounded="md" bg="white">
         <form>
-          <FormLabel> Event Date</FormLabel>
-          <Input placeholder="M/dd/yy" w="40%" />
-          <FormLabel mt="4"> Event Time</FormLabel>
-          <Input placeholder="Event Time" w="40%" />
-          <Text mt="4">Description</Text>
+          <FormLabel mt="4"> Organiser Name</FormLabel>
+          <Input placeholder="Organiser Name" w="40%" />
+          <HStack spacing="5px">
+            <InputGroup mt="4">
+              <FormLabel> Event Date</FormLabel>
+              <FormLabel ml="35%"> Event Time</FormLabel>
+            </InputGroup>
+          </HStack>
+          <HStack>
+            <InputGroup spacing="5px">
+              <Input placeholder="M/dd/yy" w="40%" />
+              <Input placeholder="Event Time" w="40%" ml="14" />
+            </InputGroup>
+          </HStack>
+          <FormLabel mt="4"> Description</FormLabel>
           <Textarea placeholder="Describe your event" />
-          <Stack direction="row" mt="4">
+          <HStack direction="row" mt="6">
             <InputGroup>
               <InputLeftElement
                 pointerEvents="none"
@@ -51,7 +61,7 @@ export default function EventForm() {
                 <NumberDecrementStepper />
               </NumberInputStepper>
             </NumberInput>
-          </Stack>
+          </HStack>
         </form>
       </Box>
     </div>
