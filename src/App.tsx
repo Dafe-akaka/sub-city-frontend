@@ -10,6 +10,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import Signup from "./components/Signup";
 
 export const app = initializeApp(appConfig);
 export const auth = getAuth(app);
@@ -36,6 +37,7 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <Switch>
             <Route exact path="/signin" component={Signin} />
+            <Route exact path="/" component={Signup} />
           </Switch>
         </CurrentUserContext.Provider>
       </Router>
