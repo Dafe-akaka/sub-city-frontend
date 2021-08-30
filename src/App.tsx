@@ -6,6 +6,7 @@ import React from "react";
 import Signin from "./components/Signin";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "./components/Signup";
+import { Dashboard } from "./components/Dashboard/Dashboard";
 
 export const app = initializeApp(appConfig);
 export const auth = getAuth(app);
@@ -33,6 +34,7 @@ function App() {
           <Switch>
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/" component={Signup} />
+            <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
         </CurrentUserContext.Provider>
       </Router>
