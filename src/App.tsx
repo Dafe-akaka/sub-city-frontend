@@ -4,11 +4,7 @@ import { initializeApp } from "@firebase/app";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React from "react";
 import Signin from "./components/Signin";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 
 export const app = initializeApp(appConfig);
