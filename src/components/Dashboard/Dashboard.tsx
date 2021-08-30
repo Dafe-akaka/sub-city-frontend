@@ -1,5 +1,6 @@
 import { Flex, Box } from "@chakra-ui/react";
 import React from "react";
+import EventForm from "./EventForm";
 import Logout from "./Logout";
 
 export const Dashboard = () => {
@@ -23,6 +24,9 @@ export const Dashboard = () => {
           </Flex>
         </Box>
       </Flex>
+      <Box>
+        <EventForm />
+      </Box>
     </div>
   );
 };
