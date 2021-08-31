@@ -20,6 +20,7 @@ export default function Signup() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (data.Password !== data.confirmPassword) {
       return setFirebaseErrorMessage("Passwords do not match");

@@ -3,19 +3,48 @@ import {
   Box,
   FormLabel,
   Textarea,
-  Text,
   HStack,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   InputLeftElement,
   InputGroup,
+  Button,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 
 export default function EventForm() {
+  const [organiserName, setOrganiserName] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [eventTime, setEventTime] = useState("");
+  const [description, setDescription] = useState("");
+  const [totalCost, setTotalCost] = useState("");
+  const [attendees, setAttendants] = useState("");
+
+  const onSubmitEvent = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // we do not want it to refresh
+    try {
+      const body = {
+        organiserName,
+        eventDate,
+        description,
+        totalCost,
+        attendees,
+      };
+
+      const response = await fetch(
+        "https://obscure-river-76343.herokuapp.com/events",
+        {
+          method: "POST",
+          headers: { "content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
+
+      window.location.href = "/dashboard";
+      console.log(response);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <div
       style={{
@@ -26,9 +55,14 @@ export default function EventForm() {
       }}
     >
       <Box boxShadow="dark-lg" p="10" rounded="md" bg="white">
-        <form>
+        <form onSubmit={(e) => onSubmitEvent(e)}>
           <FormLabel mt="4"> Organiser Name</FormLabel>
-          <Input placeholder="Organiser Name" w="40%" />
+          <Input
+            placeholder="Organiser Name"
+            w="40%"
+            value={organiserName}
+            onChange={(e) => setOrganiserName(e.target.value)}
+          />
           <HStack spacing="5px">
             <InputGroup mt="4">
               <FormLabel> Event Date</FormLabel>
@@ -36,32 +70,59 @@ export default function EventForm() {
             </InputGroup>
           </HStack>
           <HStack>
-            <InputGroup spacing="5px">
-              <Input placeholder="M/dd/yy" w="40%" />
-              <Input placeholder="Event Time" w="40%" ml="14" />
+            <InputGroup>
+              <Input
+                placeholder="YYYY-MM-DD"
+                w="40%"
+                value={eventDate}
+                onChange={(e) => setEventDate(e.target.value)}
+              />
+              <Input
+                placeholder="Event Time"
+                w="40%"
+                ml="14"
+                value={eventTime}
+                onChange={(e) => setEventTime(e.target.value)}
+              />
             </InputGroup>
           </HStack>
           <FormLabel mt="4"> Description</FormLabel>
-          <Textarea placeholder="Describe your event" />
-          <HStack direction="row" mt="6">
-            <InputGroup>
+          <Textarea
+            placeholder="Describe your event"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <HStack spacing="5px">
+            <InputGroup mt="4">
+              <FormLabel ml=""> Total cost</FormLabel>
+              <FormLabel ml="55%"> Attendants</FormLabel>
+            </InputGroup>
+          </HStack>
+          <HStack>
+            <InputGroup ml="-2">
               <InputLeftElement
                 pointerEvents="none"
                 color="gray.300"
                 fontSize="1.2em"
                 children="£"
               />
-              <Input placeholder="Total cost" />
+              <Input
+                placeholder="Total Cost"
+                w="40%"
+                value={totalCost}
+                onChange={(e) => setTotalCost(e.target.value)}
+              />
             </InputGroup>
-            <Text centerContent>Attendants</Text>
-            <NumberInput>
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
+            <Input
+              placeholder="Attendants"
+              w="40%"
+              value={attendees}
+              onChange={(e) => setAttendants(e.target.value)}
+            />
           </HStack>
+          <Button type="submit" colorScheme="green" mt="4">
+            Submit
+          </Button>
         </form>
       </Box>
     </div>
