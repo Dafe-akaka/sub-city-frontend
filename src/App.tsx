@@ -4,9 +4,10 @@ import { initializeApp } from "@firebase/app";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React from "react";
 import Signin from "./components/Signin";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Switch, Route, HashRouter } from "react-router-dom";
 import Signup from "./components/Signup";
 import { Dashboard } from "./components/Dashboard/Dashboard";
+// import { Hash } from "crypto";
 
 export const app = initializeApp(appConfig);
 export const auth = getAuth(app);
@@ -29,7 +30,7 @@ function App() {
 
   return (
     <div>
-      <Router>
+      <HashRouter>
         <CurrentUserContext.Provider value={currentUser}>
           <Switch>
             <Route exact path="/signin" component={Signin} />
@@ -37,7 +38,7 @@ function App() {
             <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
         </CurrentUserContext.Provider>
-      </Router>
+      </HashRouter>
     </div>
   );
 }
