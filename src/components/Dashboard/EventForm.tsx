@@ -39,9 +39,8 @@ export default function EventForm() {
       );
 
       const redirect = await response.text();
-      console.log(redirect)
+      console.log(redirect);
       window.location.href = redirect;
-      
     } catch (err) {
       console.error(err.message);
     }
