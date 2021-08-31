@@ -38,8 +38,9 @@ export default function EventForm() {
         }
       );
 
-      window.location.href = "/dashboard";
-      console.log(response);
+      const redirect = await response.text();
+      console.log(redirect);
+      window.location.href = redirect;
     } catch (err) {
       console.error(err.message);
     }
