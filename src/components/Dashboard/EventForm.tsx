@@ -40,7 +40,7 @@ export default function EventForm() {
 
       const redirect = await response.text();
       console.log(redirect);
-      window.location.href = redirect;
+      window.location.href = `https://obscure-river-76343.herokuapp.com/${redirect}`;
     } catch (err) {
       console.error(err.message);
     }
