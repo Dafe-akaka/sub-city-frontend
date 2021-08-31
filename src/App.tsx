@@ -3,9 +3,9 @@ import { appConfig } from "./firebase/firebaseConfig";
 import { initializeApp } from "@firebase/app";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React from "react";
-import Signin from "./components/Signin";
+import Signin from "./components/Signin/Signin";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Signup from "./components/Signup";
+import Signup from "./components/Signup/Signup";
 import { Dashboard } from "./components/Dashboard/Dashboard";
 
 export const app = initializeApp(appConfig);

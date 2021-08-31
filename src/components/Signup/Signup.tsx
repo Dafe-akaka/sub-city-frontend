@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input, Button, Box, FormLabel } from "@chakra-ui/react";
-import { auth } from "../App";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../App";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import React from "react";
@@ -9,25 +9,30 @@ import React from "react";
 type Inputs = {
   email: string;
   Password: string;
+  confirmPassword: string;
 };
 
-export default function Signin() {
-  const [firebaseErrorMessage, setFirebaseErrorMessage] =
-    useState("not signed in");
+export default function Signup() {
+  const [firebaseErrorMessage, setFirebaseErrorMessage] = useState("");
   const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    signInWithEmailAndPassword(auth, data.email, data.Password)
+    if (data.Password !== data.confirmPassword) {
+      return setFirebaseErrorMessage("Passwords do not match");
+    }
+
+    createUserWithEmailAndPassword(auth, data.email, data.Password)
       .then(() => {
         // Signed in
         //   const user = userCredential.user;
         //use useHistory to direct to dashboard
-        setFirebaseErrorMessage("signed in");
-        history.push("/dashboard");
+        setFirebaseErrorMessage("");
+        history.push("/signin");
         // ...
       })
       .catch((error) => {
@@ -36,7 +41,6 @@ export default function Signin() {
         // ..
       });
   };
-  console.log(firebaseErrorMessage);
 
   return (
     <Box
@@ -63,14 +67,20 @@ export default function Signin() {
           type="password"
           {...register("Password", { required: true })}
         />
+        <FormLabel mt="4"> Confirm Password</FormLabel>
+        <Input
+          placeholder="Confirm password"
+          type="password"
+          {...register("confirmPassword", { required: true, min: 4 })}
+        />
         {/* errors will return when field validation fails  */}
         {errors.Password && <span>This field is required</span>}
-        <Button type="submit" colorScheme="green" mt="4">
+        <Button type="submit" colorScheme="red" mt="4">
           Submit
         </Button>
         {firebaseErrorMessage && <Box color="red">{firebaseErrorMessage}</Box>}
         <FormLabel mt="4">
-          Don't have an account? <Link to="/">Signup</Link>
+          Already have an account? <Link to="/signin">Signin</Link>
         </FormLabel>
       </form>
     </Box>
