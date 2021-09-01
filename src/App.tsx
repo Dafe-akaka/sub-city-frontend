@@ -36,6 +36,7 @@ function App() {
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
+            {/* {eventIDS}.map((event) => <Route exact path `/event-${event}`> component = {AttendeeDashboard}</Route>) */}
           </Switch>
         </CurrentUserContext.Provider>
       </HashRouter>

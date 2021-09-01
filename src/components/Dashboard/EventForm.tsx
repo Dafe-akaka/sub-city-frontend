@@ -17,6 +17,7 @@ export default function EventForm() {
   const [description, setDescription] = useState("");
   const [totalCost, setTotalCost] = useState("");
   const [attendees, setAttendants] = useState("");
+  // const [eventIDS, seteventIDS] = useState(0)[]
 
   const onSubmitEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // we do not want it to refresh
@@ -39,7 +40,9 @@ export default function EventForm() {
       );
 
       const redirect = await response.text();
+      // const idNumber = await response.text()
       console.log(redirect);
+      // seteventIDS(...eventIDS, parseInt(idNumber))
       window.location.href = `https://obscure-river-76343.herokuapp.com${redirect}`;
     } catch (err) {
       console.error(err.message);
