@@ -3,10 +3,12 @@ import { appConfig } from "./firebase/firebaseConfig";
 import { initializeApp } from "@firebase/app";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React from "react";
-import Signin from "./components/Signin/Signin";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Signup from "./components/Signup/Signup";
+=======
+import Signin from "./components/Signin";
+import { BrowserRouter as Switch, Route, HashRouter } from "react-router-dom";
+import Signup from "./components/Signup";
 import { Dashboard } from "./components/Dashboard/Dashboard";
+// import { Hash } from "crypto";
 
 export const app = initializeApp(appConfig);
 export const auth = getAuth(app);
@@ -29,15 +31,16 @@ function App() {
 
   return (
     <div>
-      <Router>
+      <HashRouter>
         <CurrentUserContext.Provider value={currentUser}>
           <Switch>
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
+            {/* {eventIDS}.map((event) => <Route exact path `/event-${event}`> component = {AttendeeDashboard}</Route>) */}
           </Switch>
         </CurrentUserContext.Provider>
-      </Router>
+      </HashRouter>
     </div>
   );
 }
