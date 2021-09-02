@@ -1,14 +1,13 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { appConfig } from "./firebase/firebaseConfig";
 import { initializeApp } from "@firebase/app";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React from "react";
-=======
-import Signin from "./components/Signin";
+import Signin from "./components/Signin/Signin";
 import { BrowserRouter as Switch, Route, HashRouter } from "react-router-dom";
-import Signup from "./components/Signup";
+import Signup from "./components/Signup/Signup";
 import { Dashboard } from "./components/Dashboard/Dashboard";
-// import { Hash } from "crypto";
+import AttendeeDashboard from "./components/Dashboard/AttendeeDashboard";
 
 export const app = initializeApp(appConfig);
 export const auth = getAuth(app);
@@ -20,14 +19,16 @@ export const CurrentUserContext = createContext<any>(undefined);
 function App() {
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in
-      console.log("app.tsx signed in ");
-      setCurrentUser(user);
-    } else {
-    }
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        console.log("app.tsx signed in ");
+        setCurrentUser(user);
+      } else {
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -37,7 +38,7 @@ function App() {
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
-            {/* {eventIDS}.map((event) => <Route exact path `/event-${event}`> component = {AttendeeDashboard}</Route>) */}
+            <Route exact path="/attendee/:id" component={AttendeeDashboard} />
           </Switch>
         </CurrentUserContext.Provider>
       </HashRouter>
