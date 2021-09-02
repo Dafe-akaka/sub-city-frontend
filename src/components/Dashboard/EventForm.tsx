@@ -9,6 +9,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../App";
 
 export default function EventForm() {
   const [organiserName, setOrganiserName] = useState("");
@@ -17,7 +19,11 @@ export default function EventForm() {
   const [description, setDescription] = useState("");
   const [totalCost, setTotalCost] = useState("");
   const [attendees, setAttendants] = useState("");
-  // const [eventIDS, seteventIDS] = useState(0)[]
+  // const [eventIDS, seteventIDS] = useState("")
+
+  let { seteventIDS } = useAuth();
+
+  const history = useHistory();
 
   const onSubmitEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // we do not want it to refresh
@@ -39,11 +45,10 @@ export default function EventForm() {
         }
       );
 
-      const redirect = await response.text();
-      // const idNumber = await response.text()
-      console.log(redirect);
-      // seteventIDS(...eventIDS, parseInt(idNumber))
-      window.location.href = `https://obscure-river-76343.herokuapp.com${redirect}`;
+      let idNumber = await response.text();
+      // let  eventIdNumber = parseInt(idNumber )
+      seteventIDS(idNumber);
+      history.push(`/attendee/${idNumber}`);
     } catch (err) {
       console.error(err.message);
     }
