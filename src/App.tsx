@@ -3,6 +3,7 @@ import { appConfig } from "./firebase/firebaseConfig";
 import { initializeApp } from "@firebase/app";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import React from "react";
+=======
 import Signin from "./components/Signin";
 import { BrowserRouter as Switch, Route, HashRouter } from "react-router-dom";
 import Signup from "./components/Signup";
