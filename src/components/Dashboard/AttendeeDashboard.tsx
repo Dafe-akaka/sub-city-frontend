@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -18,7 +17,7 @@ type EventParams = {
   id: string;
 };
 
-export interface Events{
+export interface Events {
   Event_id: number;
   organiser_name: string;
   date_of_event: string;
@@ -81,22 +80,26 @@ export default function AttendeeDashboard() {
     >
       <Container boxShadow="dark-lg" p="10" rounded="md" bg="white" maxW="xl">
         {
-          <div key={events!== undefined? events.Event_id : null}>
+          <div key={events !== undefined ? events.Event_id : null}>
             <Box>
               <Text fontSize="2xl">
-                Event Organisor: {events!== undefined? events.organiser_name: null }
+                Event Organisor:{" "}
+                {events !== undefined ? events.organiser_name : null}
               </Text>
               <Text fontSize="2xl" mt="4">
-                Event Date: {events!== undefined ? events.date_of_event.slice(0, 10): null}
+                Event Date:{" "}
+                {events !== undefined
+                  ? events.date_of_event.slice(0, 10)
+                  : null}
               </Text>
               <Text fontSize="2xl" mt="4">
-                Event Time: {events!== undefined ? events.time_of_event: null}
+                Event Time: {events !== undefined ? events.time_of_event : null}
               </Text>
               <Text fontSize="2xl" mt="4">
                 Event Description
               </Text>
               <Text fontSize="2xl" mt="2">
-                {events!== undefined? events.description: null}
+                {events !== undefined ? events.description : null}
               </Text>
               <HStack mt="4">
                 <Checkbox colorScheme="green" size="lg" isInvalid mr="20%">
@@ -105,16 +108,21 @@ export default function AttendeeDashboard() {
 
                 <Text fontSize="xl" ml="7">
                   Cost Per Person: £
-                  {events!== undefined? new Intl.NumberFormat("de-DE", {
-                    style: "currency",
-                    currency: "EUR",
-                  })
-                    .format(Number(events.total_cost / events.num_of_attendees))
-                    .replace(/[^a-zA-Z0-9]/g, ""): null}
+                  {events !== undefined
+                    ? new Intl.NumberFormat("de-DE", {
+                        style: "currency",
+                        currency: "EUR",
+                      })
+                        .format(
+                          Number(events.total_cost / events.num_of_attendees)
+                        )
+                        .replace(/[^a-zA-Z0-9]/g, "")
+                    : null}
                 </Text>
               </HStack>
             </Box>
-          </div>}
+          </div>
+        }
 
         <form onSubmit={(e) => onSubmitAttendeeName(e)}>
           <Box mt="5">
