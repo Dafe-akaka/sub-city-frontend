@@ -59,7 +59,7 @@ export default function AttendeeDashboard() {
     };
 
     getEvent();
-  }, [event]);
+  }, [event, id]);
 
   const onSubmitAttendeeName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // we do not want it to refresh
