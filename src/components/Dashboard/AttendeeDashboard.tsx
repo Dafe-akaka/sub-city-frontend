@@ -47,7 +47,7 @@ export default function AttendeeDashboard() {
 
   useEffect(() => {
     getEvent();
-  },[] )
+  }, []);
 
   const onSubmitAttendeeName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // we do not want it to refresh
@@ -69,7 +69,7 @@ export default function AttendeeDashboard() {
     }
   };
 
-  console.log({events})
+  console.log({ events });
 
   return (
     <div
@@ -80,19 +80,18 @@ export default function AttendeeDashboard() {
         transform: "translate(-50%,-50%)",
       }}
     >
-
       <Container boxShadow="dark-lg" p="10" rounded="md" bg="white" maxW="xl">
         {
           <div key={events?.event_id}>
             <Box>
               <Text fontSize="2xl">
-                Event Organisor:{" "}
-                {events?.organiser_name}
+                Event Organisor: {events?.organiser_name}
               </Text>
               <Text fontSize="2xl" mt="4">
-                Event Date: 
-                { events?.date_of_event
-                // .slice(0, 10)
+                Event Date:
+                {
+                  events?.date_of_event
+                  // .slice(0, 10)
                 }
               </Text>
               <Text fontSize="2xl" mt="4">
@@ -111,8 +110,8 @@ export default function AttendeeDashboard() {
 
                 <Text fontSize="xl" ml="7">
                   Cost Per Person: £
-                  {events !== undefined ?
-                  new Intl.NumberFormat("de-DE", {
+                  {events !== undefined
+                    ? new Intl.NumberFormat("de-DE", {
                         style: "currency",
                         currency: "EUR",
                       })
@@ -120,7 +119,7 @@ export default function AttendeeDashboard() {
                           Number(events?.total_cost / events?.num_of_attendees)
                         )
                         .replace(/[^a-zA-Z0-9]/g, "")
-                  : null}
+                    : null}
                 </Text>
               </HStack>
             </Box>
