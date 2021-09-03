@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useAuth } from "../../App";
 
 export default function EventForm() {
   const [organiserName, setOrganiserName] = useState("");
@@ -19,9 +18,6 @@ export default function EventForm() {
   const [description, setDescription] = useState("");
   const [totalCost, setTotalCost] = useState("");
   const [attendees, setAttendants] = useState("");
-  // const [eventIDS, seteventIDS] = useState("")
-
-  let { seteventIDS } = useAuth();
 
   const history = useHistory();
 
@@ -47,7 +43,6 @@ export default function EventForm() {
 
       let idNumber = await response.text();
       // let  eventIdNumber = parseInt(idNumber )
-      seteventIDS(idNumber);
       history.push(`/attendee/${idNumber}`);
     } catch (err) {
       console.error(err.message);
