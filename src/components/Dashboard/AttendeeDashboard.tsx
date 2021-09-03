@@ -48,10 +48,10 @@ export default function AttendeeDashboard() {
   useEffect(() => {
     const getEvent = async () => {
       try {
-        const response = await fetch(
+        const fetchEventInfo = await fetch(
           `https://obscure-river-76343.herokuapp.com/event-info/${id}`
         );
-        const jsonData: Event = await response.json();
+        const jsonData: Event = await fetchEventInfo.json();
         setEvent(jsonData);
       } catch (err) {
         console.error(err.message);
@@ -59,14 +59,14 @@ export default function AttendeeDashboard() {
     };
 
     getEvent();
-  }, [event, id]);
+  }, [event]);
 
   const onSubmitAttendeeName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // we do not want it to refresh
     try {
       const body = { attendeeName };
 
-      const response = await fetch(
+      const sendAttendeeInfo = await fetch(
         `http://obscure-river-76343.herokuapp.com/attendee/buy/${id}`,
         {
           method: "POST",
@@ -74,7 +74,7 @@ export default function AttendeeDashboard() {
           body: JSON.stringify(body),
         }
       );
-      console.log(response);
+      console.log(sendAttendeeInfo);
       //   window.location.href = "/";
     } catch (err) {
       console.error(err.message);
