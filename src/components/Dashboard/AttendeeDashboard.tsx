@@ -33,21 +33,33 @@ export default function AttendeeDashboard() {
   const [attendeeName, SetAttendeeName] = useState("");
   //   const [cost, setCost] = useState("");
 
-  const getEvent = async () => {
-    try {
-      const response = await fetch(
-        `https://obscure-river-76343.herokuapp.com/event-info/${id}`
-      );
-      const jsonData = await response.json();
-      setEvents(jsonData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  // const getEvent = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://obscure-river-76343.herokuapp.com/event-info/${id}`
+  //     );
+  //     const jsonData = await response.json();
+  //     setEvents(jsonData);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // };
 
   useEffect(() => {
+    const getEvent = async () => {
+      try {
+        const response = await fetch(
+          `https://obscure-river-76343.herokuapp.com/event-info/${id}`
+        );
+        const jsonData = await response.json();
+        setEvents(jsonData);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+
     getEvent();
-  }, []);
+  }, [events, id]);
 
   const onSubmitAttendeeName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // we do not want it to refresh
