@@ -30,6 +30,7 @@ export default function EventForm() {
         description,
         totalCost,
         attendees,
+        eventTime,
       };
 
       const response = await fetch(
@@ -42,6 +43,7 @@ export default function EventForm() {
       );
 
       let idNumber = await response.text();
+      console.log(idNumber);
       // let  eventIdNumber = parseInt(idNumber )
       history.push(`/attendee/${idNumber}`);
     } catch (err) {
