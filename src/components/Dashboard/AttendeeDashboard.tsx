@@ -51,7 +51,7 @@ export default function AttendeeDashboard() {
         const response = await fetch(
           `https://obscure-river-76343.herokuapp.com/event-info/${id}`
         );
-        const jsonData:Event = await response.json();
+        const jsonData: Event = await response.json();
         setEvent(jsonData);
       } catch (err) {
         console.error(err.message);
