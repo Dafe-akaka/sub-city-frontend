@@ -17,7 +17,7 @@ type EventParams = {
   id: string;
 };
 
-export interface Events {
+export interface Event {
   event_id: number;
   organiser_name: string;
   date_of_event: string;
@@ -29,7 +29,7 @@ export interface Events {
 
 export default function AttendeeDashboard() {
   let { id } = useParams<EventParams>();
-  const [events, setEvents] = useState<Events>();
+  const [event, setEvent] = useState<Event>();
   const [attendeeName, SetAttendeeName] = useState("");
   //   const [cost, setCost] = useState("");
 
@@ -52,14 +52,14 @@ export default function AttendeeDashboard() {
           `https://obscure-river-76343.herokuapp.com/event-info/${id}`
         );
         const jsonData = await response.json();
-        setEvents(jsonData);
+        setEvent(jsonData);
       } catch (err) {
         console.error(err.message);
       }
     };
 
     getEvent();
-  }, [events, id]);
+  }, [event, id]);
 
   const onSubmitAttendeeName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // we do not want it to refresh
@@ -81,7 +81,7 @@ export default function AttendeeDashboard() {
     }
   };
 
-  console.log({ events });
+  console.log({ event });
 
   return (
     <div
@@ -94,26 +94,26 @@ export default function AttendeeDashboard() {
     >
       <Container boxShadow="dark-lg" p="10" rounded="md" bg="white" maxW="xl">
         {
-          <div key={events?.event_id}>
+          <div key={event?.event_id}>
             <Box>
               <Text fontSize="2xl">
-                Event Organisor: {events?.organiser_name}
+                Event Organisor: {event?.organiser_name}
               </Text>
               <Text fontSize="2xl" mt="4">
                 Event Date:
                 {
-                  events?.date_of_event
+                  event?.date_of_event
                   // .slice(0, 10)
                 }
               </Text>
               <Text fontSize="2xl" mt="4">
-                Event Time: {events?.time_of_event}
+                Event Time: {event?.time_of_event}
               </Text>
               <Text fontSize="2xl" mt="4">
                 Event Description
               </Text>
               <Text fontSize="2xl" mt="2">
-                {events?.description}
+                {event?.description}
               </Text>
               <HStack mt="4">
                 <Checkbox colorScheme="green" size="lg" isInvalid mr="20%">
@@ -122,13 +122,13 @@ export default function AttendeeDashboard() {
 
                 <Text fontSize="xl" ml="7">
                   Cost Per Person: £
-                  {events !== undefined
+                  {event !== undefined
                     ? new Intl.NumberFormat("de-DE", {
                         style: "currency",
                         currency: "EUR",
                       })
                         .format(
-                          Number(events?.total_cost / events?.num_of_attendees)
+                          Number(event?.total_cost / event?.num_of_attendees)
                         )
                         .replace(/[^a-zA-Z0-9]/g, "")
                     : null}
