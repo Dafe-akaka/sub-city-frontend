@@ -18,7 +18,7 @@ type EventParams = {
 };
 
 export interface Events {
-  Event_id: number;
+  event_id: number;
   organiser_name: string;
   date_of_event: string;
   num_of_attendees: number;
@@ -47,7 +47,7 @@ export default function AttendeeDashboard() {
 
   useEffect(() => {
     getEvent();
-  });
+  },[] )
 
   const onSubmitAttendeeName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // we do not want it to refresh
@@ -69,6 +69,8 @@ export default function AttendeeDashboard() {
     }
   };
 
+  console.log({events})
+
   return (
     <div
       style={{
@@ -78,28 +80,29 @@ export default function AttendeeDashboard() {
         transform: "translate(-50%,-50%)",
       }}
     >
+
       <Container boxShadow="dark-lg" p="10" rounded="md" bg="white" maxW="xl">
         {
-          <div key={events !== undefined ? events.Event_id : null}>
+          <div key={events?.event_id}>
             <Box>
               <Text fontSize="2xl">
                 Event Organisor:{" "}
-                {events !== undefined ? events.organiser_name : null}
+                {events?.organiser_name}
               </Text>
               <Text fontSize="2xl" mt="4">
-                Event Date:{" "}
-                {events !== undefined
-                  ? events.date_of_event.slice(0, 10)
-                  : null}
+                Event Date: 
+                { events?.date_of_event
+                // .slice(0, 10)
+                }
               </Text>
               <Text fontSize="2xl" mt="4">
-                Event Time: {events !== undefined ? events.time_of_event : null}
+                Event Time: {events?.time_of_event}
               </Text>
               <Text fontSize="2xl" mt="4">
                 Event Description
               </Text>
               <Text fontSize="2xl" mt="2">
-                {events !== undefined ? events.description : null}
+                {events?.description}
               </Text>
               <HStack mt="4">
                 <Checkbox colorScheme="green" size="lg" isInvalid mr="20%">
@@ -108,16 +111,16 @@ export default function AttendeeDashboard() {
 
                 <Text fontSize="xl" ml="7">
                   Cost Per Person: £
-                  {events !== undefined
-                    ? new Intl.NumberFormat("de-DE", {
+                  {events !== undefined ?
+                  new Intl.NumberFormat("de-DE", {
                         style: "currency",
                         currency: "EUR",
                       })
                         .format(
-                          Number(events.total_cost / events.num_of_attendees)
+                          Number(events?.total_cost / events?.num_of_attendees)
                         )
                         .replace(/[^a-zA-Z0-9]/g, "")
-                    : null}
+                  : null}
                 </Text>
               </HStack>
             </Box>
