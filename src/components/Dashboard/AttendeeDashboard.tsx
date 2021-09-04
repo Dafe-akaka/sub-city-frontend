@@ -38,7 +38,7 @@ export default function AttendeeDashboard() {
   const [description, setDescription] = useState("");
   const [timeOfEvent, setTimeOfEvent] = useState("");
 
-  const costPerPerson = totalCost / numOfAttendees
+  const costPerPerson = (totalCost / numOfAttendees).toFixed(2)
 
   const fetchLink = `https://obscure-river-76343.herokuapp.com/event-info/${id}`;
 
@@ -64,27 +64,32 @@ export default function AttendeeDashboard() {
     getEvent();
   }, [fetchLink]);
 
-  const onSubmitAttendeeName = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // we do not want it to refresh
-    try {
-      const body = { attendeeName, costPerPerson};
+  const handleSubmitAttendeeName = async () => {
+    // e.preventDefault(); // we do not want it to refresh;
+
+      function intoPennies (number:string){
+        let convertToString = number.replace(/[^a-zA-Z0-9]/g, "")
+        
+        return Number(convertToString)
+      }
+
+      const costInPennies = intoPennies(costPerPerson)
+
+      const body = { attendeeName, costInPennies}
 
       const sendAttendeeInfo = await fetch(
-        `http://obscure-river-76343.herokuapp.com/attendee/buy/${id}`,
+        `http://localhost:4000/attendee/buy/${id}`,
         {
           method: "POST",
           headers: { "content-Type": "application/json" },
           body: JSON.stringify(body),
         }
       );
-      console.log(sendAttendeeInfo);
-      //   window.location.href = "/";
-    } catch (err) {
-      console.error(err.message);
-    }
+      const redirect = await sendAttendeeInfo.text()
+      window.location.href = redirect;
   };
 
-  console.log({dateOfEvent});
+  console.log(costPerPerson)
 
   return (
     <div
@@ -131,7 +136,7 @@ export default function AttendeeDashboard() {
           </div>
         }
 
-        <form onSubmit={(e) => onSubmitAttendeeName(e)}>
+        {/* <form onSubmit={(e) => onSubmitAttendeeName(e)}> */}
           <Box mt="5">
             <VStack>
               <HStack>
@@ -144,7 +149,7 @@ export default function AttendeeDashboard() {
                   onChange={(e) => SetAttendeeName(e.target.value)}
                 ></Input>
               </HStack>
-              <Button
+              <Button onClick = {() => handleSubmitAttendeeName() }
                 leftIcon={<ArrowForwardIcon />}
                 colorScheme="yellow"
                 variant="solid"
@@ -154,7 +159,6 @@ export default function AttendeeDashboard() {
               </Button>
             </VStack>
           </Box>
-        </form>
       </Container>
     </div>
   );
