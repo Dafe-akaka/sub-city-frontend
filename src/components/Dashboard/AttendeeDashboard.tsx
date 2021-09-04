@@ -17,8 +17,8 @@ type EventParams = {
   id: string;
 };
 
-export interface Events {
-  Event_id: number;
+export interface Event {
+  event_id: number;
   organiser_name: string;
   date_of_event: string;
   num_of_attendees: number;
@@ -29,32 +29,44 @@ export interface Events {
 
 export default function AttendeeDashboard() {
   let { id } = useParams<EventParams>();
-  const [events, setEvents] = useState<Events[]>([]);
+  const [event, setEvent] = useState<Event>();
   const [attendeeName, SetAttendeeName] = useState("");
   //   const [cost, setCost] = useState("");
 
-  const getEvent = async () => {
-    try {
-      const response = await fetch(
-        `https://obscure-river-76343.herokuapp.com/event-info/${id}`
-      );
-      const jsonData = await response.json();
-      setEvents(jsonData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  // const getEvent = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://obscure-river-76343.herokuapp.com/event-info/${id}`
+  //     );
+  //     const jsonData = await response.json();
+  //     setEvents(jsonData);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // };
 
   useEffect(() => {
+    const getEvent = async () => {
+      try {
+        const fetchEventInfo = await fetch(
+          `https://obscure-river-76343.herokuapp.com/event-info/${id}`
+        );
+        const jsonData: Event = await fetchEventInfo.json();
+        setEvent(jsonData);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+
     getEvent();
-  });
+  }, [event, id]);
 
   const onSubmitAttendeeName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // we do not want it to refresh
     try {
       const body = { attendeeName };
 
-      const response = await fetch(
+      const sendAttendeeInfo = await fetch(
         `http://obscure-river-76343.herokuapp.com/attendee/buy/${id}`,
         {
           method: "POST",
@@ -62,12 +74,14 @@ export default function AttendeeDashboard() {
           body: JSON.stringify(body),
         }
       );
-      console.log(response);
+      console.log(sendAttendeeInfo);
       //   window.location.href = "/";
     } catch (err) {
       console.error(err.message);
     }
   };
+
+  console.log({ event });
 
   return (
     <div
@@ -79,23 +93,27 @@ export default function AttendeeDashboard() {
       }}
     >
       <Container boxShadow="dark-lg" p="10" rounded="md" bg="white" maxW="xl">
-        {events.map((event) => (
-          <div key={event.Event_id}>
+        {
+          <div key={event?.event_id}>
             <Box>
               <Text fontSize="2xl">
-                Event Organisor: {event.organiser_name}
+                Event Organisor: {event?.organiser_name}
               </Text>
               <Text fontSize="2xl" mt="4">
-                Event Date: {event.date_of_event.slice(0, 10)}
+                Event Date:
+                {
+                  event?.date_of_event
+                  // .slice(0, 10)
+                }
               </Text>
               <Text fontSize="2xl" mt="4">
-                Event Time: {event.time_of_event}
+                Event Time: {event?.time_of_event}
               </Text>
               <Text fontSize="2xl" mt="4">
                 Event Description
               </Text>
               <Text fontSize="2xl" mt="2">
-                {event.description}
+                {event?.description}
               </Text>
               <HStack mt="4">
                 <Checkbox colorScheme="green" size="lg" isInvalid mr="20%">
@@ -104,17 +122,21 @@ export default function AttendeeDashboard() {
 
                 <Text fontSize="xl" ml="7">
                   Cost Per Person: £
-                  {new Intl.NumberFormat("de-DE", {
-                    style: "currency",
-                    currency: "EUR",
-                  })
-                    .format(Number(event.total_cost / event.num_of_attendees))
-                    .replace(/[^a-zA-Z0-9]/g, "")}
+                  {event !== undefined
+                    ? new Intl.NumberFormat("de-DE", {
+                        style: "currency",
+                        currency: "EUR",
+                      })
+                        .format(
+                          Number(event?.total_cost / event?.num_of_attendees)
+                        )
+                        .replace(/[^a-zA-Z0-9]/g, "")
+                    : null}
                 </Text>
               </HStack>
             </Box>
           </div>
-        ))}
+        }
 
         <form onSubmit={(e) => onSubmitAttendeeName(e)}>
           <Box mt="5">
