@@ -38,7 +38,7 @@ export default function AttendeeDashboard() {
   const [description, setDescription] = useState("");
   const [timeOfEvent, setTimeOfEvent] = useState("");
 
-  const costPerPerson = (totalCost / numOfAttendees).toFixed(2)
+  const costPerPerson = (totalCost / numOfAttendees).toFixed(2);
 
   const fetchLink = `https://obscure-river-76343.herokuapp.com/event-info/${id}`;
 
@@ -46,10 +46,10 @@ export default function AttendeeDashboard() {
     const getEvent = async () => {
       try {
         const fetchEventInfo = await fetch(fetchLink);
-        const jsonData: Event [] = await fetchEventInfo.json();
-        const eventInfo : Event = jsonData[0]
+        const jsonData: Event[] = await fetchEventInfo.json();
+        const eventInfo: Event = jsonData[0];
 
-        console.log({jsonData})
+        console.log({ jsonData });
         setOrganiserName(eventInfo.organiser_name);
         setDateOfEvent(eventInfo.date_of_event);
         setnumOfAttendees(eventInfo.num_of_attendees);
@@ -67,29 +67,29 @@ export default function AttendeeDashboard() {
   const handleSubmitAttendeeName = async () => {
     // e.preventDefault(); // we do not want it to refresh;
 
-      function intoPennies (number:string){
-        let convertToString = number.replace(/[^a-zA-Z0-9]/g, "")
-        
-        return Number(convertToString)
+    function intoPennies(number: string) {
+      let convertToString = number.replace(/[^a-zA-Z0-9]/g, "");
+
+      return Number(convertToString);
+    }
+
+    const costInPennies = intoPennies(costPerPerson);
+
+    const body = { attendeeName, costInPennies };
+
+    const sendAttendeeInfo = await fetch(
+      `https://obscure-river-76343.herokuapp.com/attendee/buy/${id}`,
+      {
+        method: "POST",
+        headers: { "content-Type": "application/json" },
+        body: JSON.stringify(body),
       }
-
-      const costInPennies = intoPennies(costPerPerson)
-
-      const body = { attendeeName, costInPennies}
-
-      const sendAttendeeInfo = await fetch(
-        `http://localhost:4000/attendee/buy/${id}`,
-        {
-          method: "POST",
-          headers: { "content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }
-      );
-      const redirect = await sendAttendeeInfo.text()
-      window.location.href = redirect;
+    );
+    const redirect = await sendAttendeeInfo.text();
+    window.location.href = redirect;
   };
 
-  console.log(costPerPerson)
+  console.log(costPerPerson);
 
   return (
     <div
@@ -124,12 +124,11 @@ export default function AttendeeDashboard() {
                 </Checkbox>
 
                 <Text fontSize="xl" ml="7">
-                  Cost Per Person: 
+                  Cost Per Person:
                   {new Intl.NumberFormat("en-US", {
                     style: "currency",
                     currency: "GBP",
-                  })
-                    .format(Number(costPerPerson))}
+                  }).format(Number(costPerPerson))}
                 </Text>
               </HStack>
             </Box>
@@ -137,28 +136,29 @@ export default function AttendeeDashboard() {
         }
 
         {/* <form onSubmit={(e) => onSubmitAttendeeName(e)}> */}
-          <Box mt="5">
-            <VStack>
-              <HStack>
-                <FormLabel mt="4"> Attendee Name:</FormLabel>
-                <Input
-                  placeholder="Attendee Name"
-                  w="40%"
-                  ml="4"
-                  value={attendeeName}
-                  onChange={(e) => SetAttendeeName(e.target.value)}
-                ></Input>
-              </HStack>
-              <Button onClick = {() => handleSubmitAttendeeName() }
-                leftIcon={<ArrowForwardIcon />}
-                colorScheme="yellow"
-                variant="solid"
-                mt="5"
-              >
-                Transfer Money
-              </Button>
-            </VStack>
-          </Box>
+        <Box mt="5">
+          <VStack>
+            <HStack>
+              <FormLabel mt="4"> Attendee Name:</FormLabel>
+              <Input
+                placeholder="Attendee Name"
+                w="40%"
+                ml="4"
+                value={attendeeName}
+                onChange={(e) => SetAttendeeName(e.target.value)}
+              ></Input>
+            </HStack>
+            <Button
+              onClick={() => handleSubmitAttendeeName()}
+              leftIcon={<ArrowForwardIcon />}
+              colorScheme="yellow"
+              variant="solid"
+              mt="5"
+            >
+              Transfer Money
+            </Button>
+          </VStack>
+        </Box>
       </Container>
     </div>
   );
