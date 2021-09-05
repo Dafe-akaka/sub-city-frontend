@@ -9,7 +9,7 @@ import Signup from "./components/Signup/Signup";
 import { Dashboard } from "./components/Dashboard/Dashboard";
 import AttendeeDashboard from "./components/Dashboard/AttendeeDashboard";
 
-import SuccessPage from "./components/SuccessPage"
+import SuccessPage from "./components/SuccessPage";
 
 export const app = initializeApp(appConfig);
 export const auth = getAuth(app);
@@ -41,7 +41,7 @@ function App() {
             <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/attendee/:id" component={AttendeeDashboard} />
-            <Route path = "/order/success" component = {SuccessPage} />
+            <Route path="/order/success" component={SuccessPage} />
           </Switch>
         </CurrentUserContext.Provider>
       </HashRouter>
