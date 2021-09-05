@@ -7,11 +7,15 @@ import {
   VStack,
   Checkbox,
   Input,
-  Container,
   Box,
   FormLabel,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Card } from "./Card";
+import { CardHeader } from "./CardHeader";
+import { CardContent } from "./CardContent";
+import { Property } from "./Property";
 
 type EventParams = {
   id: string;
@@ -100,46 +104,35 @@ export default function AttendeeDashboard() {
         transform: "translate(-50%,-50%)",
       }}
     >
-      <Container boxShadow="dark-lg" p="10" rounded="md" bg="white" maxW="xl">
-        {
-          <div key={id}>
-            <Box>
-              <Text fontSize="2xl">Event Organisor: {organiserName}</Text>
-              <Text fontSize="2xl" mt="4">
-                Event Date:
-                {dateOfEvent?.slice(0, 10)}
-              </Text>
-              <Text fontSize="2xl" mt="4">
-                Event Time: {timeOfEvent}
-              </Text>
-              <Text fontSize="2xl" mt="4">
-                Event Description
-              </Text>
-              <Text fontSize="2xl" mt="2">
-                {description}
-              </Text>
-              <HStack mt="4">
-                <Checkbox colorScheme="green" size="lg" isInvalid mr="20%">
-                  Attending Event
-                </Checkbox>
+      <Box
+        as="section"
+        bg={useColorModeValue("gray.100", "inherit")}
+        py="12"
+        px={{ md: "8" }}
+      >
+        <Card>
+          <CardHeader title="Event Information" />
+          <CardContent>
+            <Property label="Organisor" value={organiserName} />
+            <Property label="Date" value={dateOfEvent?.slice(0, 10)} />
+            <Property label="Time" value={timeOfEvent} />
+            <Property label="Description" value={description} />
+            <HStack mt="4" ml="20">
+              <Checkbox colorScheme="green" size="lg" isInvalid mr="20%">
+                Attending Event
+              </Checkbox>
 
-                <Text fontSize="xl" ml="7">
-                  Cost Per Person:
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "GBP",
-                  }).format(Number(costPerPerson))}
-                </Text>
-              </HStack>
-            </Box>
-          </div>
-        }
-
-        {/* <form onSubmit={(e) => onSubmitAttendeeName(e)}> */}
-        <Box mt="5">
-          <VStack>
-            <HStack>
-              <FormLabel mt="4"> Attendee Name:</FormLabel>
+              <Text fontSize="xl" ml="7">
+                Cost Per Person:
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "GBP",
+                }).format(Number(costPerPerson))}
+              </Text>
+            </HStack>
+          </CardContent>
+          <Box mt="5" mb="5" >
+            <HStack ml="20">
               <Input
                 placeholder="Attendee Name"
                 w="40%"
@@ -147,19 +140,20 @@ export default function AttendeeDashboard() {
                 value={attendeeName}
                 onChange={(e) => SetAttendeeName(e.target.value)}
               ></Input>
+              <Button
+                onClick={() => handleSubmitAttendeeName()}
+                leftIcon={<ArrowForwardIcon />}
+                colorScheme="yellow"
+                variant="solid"
+                mt="5"
+                mb="5"
+              >
+                Transfer Money
+              </Button>
             </HStack>
-            <Button
-              onClick={() => handleSubmitAttendeeName()}
-              leftIcon={<ArrowForwardIcon />}
-              colorScheme="yellow"
-              variant="solid"
-              mt="5"
-            >
-              Transfer Money
-            </Button>
-          </VStack>
-        </Box>
-      </Container>
+          </Box>
+        </Card>
+      </Box>
     </div>
   );
 }
