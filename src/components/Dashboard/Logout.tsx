@@ -28,6 +28,7 @@ const Logout = () => {
         type="button"
         colorScheme="red"
         mt="4"
+        size="lg"
       >
         Logout
       </Button>

@@ -7,7 +7,7 @@ import Signin from "./components/Signin/Signin";
 import { BrowserRouter as Switch, Route, HashRouter } from "react-router-dom";
 import Signup from "./components/Signup/Signup";
 import { Dashboard } from "./components/Dashboard/Dashboard";
-import AttendeeDashboard from "./components/Dashboard/AttendeeDashboard";
+import AttendeeDashboard from "./components/Dashboard/Attendants /AttendeeDashboard";
 
 import SuccessPage from "./components/SuccessPage";
 
@@ -41,7 +41,7 @@ function App() {
             <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/attendee/:id" component={AttendeeDashboard} />
-            <Route path="/order/success" component={SuccessPage} />
+            <Route exact path="/order/success" component={SuccessPage} />
           </Switch>
         </CurrentUserContext.Provider>
       </HashRouter>

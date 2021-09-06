@@ -4,14 +4,17 @@ import {
   Button,
   Text,
   HStack,
-  VStack,
   Checkbox,
   Input,
-  Container,
   Box,
-  FormLabel,
+  useColorModeValue,
+  Flex,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Card } from "./Card";
+import { CardHeader } from "./CardHeader";
+import { CardContent } from "./CardContent";
+import { Property } from "./Property";
 
 type EventParams = {
   id: string;
@@ -29,7 +32,6 @@ export interface Event {
 
 export default function AttendeeDashboard() {
   let { id } = useParams<EventParams>();
-  // const [event, setEvent] = useState<Event>();
   const [attendeeName, SetAttendeeName] = useState("");
   const [organiserName, setOrganiserName] = useState("");
   const [dateOfEvent, setDateOfEvent] = useState("");
@@ -92,74 +94,73 @@ export default function AttendeeDashboard() {
   console.log(costPerPerson);
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%,-50%)",
-      }}
-    >
-      <Container boxShadow="dark-lg" p="10" rounded="md" bg="white" maxW="xl">
-        {
-          <div key={id}>
-            <Box>
-              <Text fontSize="2xl">Event Organisor: {organiserName}</Text>
-              <Text fontSize="2xl" mt="4">
-                Event Date:
-                {dateOfEvent?.slice(0, 10)}
-              </Text>
-              <Text fontSize="2xl" mt="4">
-                Event Time: {timeOfEvent}
-              </Text>
-              <Text fontSize="2xl" mt="4">
-                Event Description
-              </Text>
-              <Text fontSize="2xl" mt="2">
-                {description}
-              </Text>
-              <HStack mt="4">
+    <div>
+      <Flex bg="black">
+        <Flex bg="red"></Flex>
+        <Flex position="fixed" top="1rem" right="1rem" align="center" mt="-3">
+          <Text fontSize="40px" color="Red">
+            Sub-city
+          </Text>
+        </Flex>
+      </Flex>
+      <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%,-50%)",
+        }}
+      >
+        <Box
+          as="section"
+          bg={useColorModeValue("gray.100", "inherit")}
+          py="12"
+          px={{ md: "8" }}
+        >
+          <Card>
+            <CardHeader title="Event Information" />
+            <CardContent>
+              <Property label="Organisor" value={organiserName} />
+              <Property label="Date" value={dateOfEvent?.slice(0, 10)} />
+              <Property label="Time" value={timeOfEvent} />
+              <Property label="Description" value={description} />
+              <HStack mt="4" ml="20">
                 <Checkbox colorScheme="green" size="lg" isInvalid mr="20%">
                   Attending Event
                 </Checkbox>
 
                 <Text fontSize="xl" ml="7">
-                  Cost Per Person:
+                  Cost:
                   {new Intl.NumberFormat("en-US", {
                     style: "currency",
                     currency: "GBP",
                   }).format(Number(costPerPerson))}
                 </Text>
               </HStack>
+            </CardContent>
+            <Box mt="5" mb="5">
+              <HStack ml="20">
+                <Input
+                  placeholder="Attendee Name"
+                  w="40%"
+                  ml="4"
+                  value={attendeeName}
+                  onChange={(e) => SetAttendeeName(e.target.value)}
+                ></Input>
+                <Button
+                  onClick={() => handleSubmitAttendeeName()}
+                  leftIcon={<ArrowForwardIcon />}
+                  colorScheme="yellow"
+                  variant="solid"
+                  ml="8"
+                >
+                  Transfer Money
+                </Button>
+              </HStack>
             </Box>
-          </div>
-        }
-
-        {/* <form onSubmit={(e) => onSubmitAttendeeName(e)}> */}
-        <Box mt="5">
-          <VStack>
-            <HStack>
-              <FormLabel mt="4"> Attendee Name:</FormLabel>
-              <Input
-                placeholder="Attendee Name"
-                w="40%"
-                ml="4"
-                value={attendeeName}
-                onChange={(e) => SetAttendeeName(e.target.value)}
-              ></Input>
-            </HStack>
-            <Button
-              onClick={() => handleSubmitAttendeeName()}
-              leftIcon={<ArrowForwardIcon />}
-              colorScheme="yellow"
-              variant="solid"
-              mt="5"
-            >
-              Transfer Money
-            </Button>
-          </VStack>
+          </Card>
         </Box>
-      </Container>
+      </div>
     </div>
   );
 }
