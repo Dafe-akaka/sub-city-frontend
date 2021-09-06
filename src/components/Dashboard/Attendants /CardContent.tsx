@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@chakra-ui/react'
-import * as React from 'react'
+import { Box, BoxProps } from "@chakra-ui/react";
+import * as React from "react";
 
-export const CardContent = (props: BoxProps) => <Box {...props} />
+export const CardContent = (props: BoxProps) => <Box {...props} />;

@@ -1,17 +1,23 @@
-import { Flex, Heading } from '@chakra-ui/react'
-import * as React from 'react'
+import { Flex, Heading } from "@chakra-ui/react";
+import * as React from "react";
 
 interface Props {
-  title: string
+  title: string;
 }
 
 export const CardHeader = (props: Props) => {
-  const { title} = props
+  const { title } = props;
   return (
-    <Flex align="center" justify="space-between" px="6" py="4" borderBottomWidth="1px">
+    <Flex
+      align="center"
+      justify="space-between"
+      px="6"
+      py="4"
+      borderBottomWidth="1px"
+    >
       <Heading as="h2" fontSize="lg">
         {title}
       </Heading>
     </Flex>
-  )
-}
+  );
+};
