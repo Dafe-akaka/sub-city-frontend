@@ -51,7 +51,6 @@ export default function AttendeeDashboard() {
         const jsonData: Event[] = await fetchEventInfo.json();
         const eventInfo: Event = jsonData[0];
 
-        console.log({ jsonData });
         setOrganiserName(eventInfo.organiser_name);
         setDateOfEvent(eventInfo.date_of_event);
         setnumOfAttendees(eventInfo.num_of_attendees);

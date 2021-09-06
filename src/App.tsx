@@ -41,7 +41,7 @@ function App() {
             <Route exact path="/" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/attendee/:id" component={AttendeeDashboard} />
-            <Route exact path="/order/success" component={SuccessPage} />
+            <Route path="/order/success" component={SuccessPage} />
           </Switch>
         </CurrentUserContext.Provider>
       </HashRouter>
