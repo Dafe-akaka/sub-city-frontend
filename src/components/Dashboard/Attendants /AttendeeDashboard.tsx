@@ -39,6 +39,7 @@ export default function AttendeeDashboard() {
   const [totalCost, setTotalCost] = useState(0);
   const [description, setDescription] = useState("");
   const [timeOfEvent, setTimeOfEvent] = useState("");
+  const [attending, setAttending] = useState(false);
 
   const costPerPerson = (totalCost / numOfAttendees).toFixed(2);
 
@@ -129,7 +130,14 @@ export default function AttendeeDashboard() {
               <Property label="Time" value={timeOfEvent} />
               <Property label="Description" value={description} />
               <HStack mt="4" ml="20">
-                <Checkbox colorScheme="green" size="lg" isInvalid mr="20%">
+                <Checkbox
+                  colorScheme="green"
+                  size="lg"
+                  isInvalid
+                  mr="20%"
+                  ischecked={attending}
+                  onChange={(e) => setAttending(e.target.checked)}
+                >
                   Attending Event
                 </Checkbox>
 
@@ -142,26 +150,28 @@ export default function AttendeeDashboard() {
                 </Text>
               </HStack>
             </CardContent>
-            <Box mt="5" mb="5">
-              <HStack ml="20">
-                <Input
-                  placeholder="Attendee Name"
-                  w="40%"
-                  ml="4"
-                  value={attendeeName}
-                  onChange={(e) => SetAttendeeName(e.target.value)}
-                ></Input>
-                <Button
-                  onClick={() => handleSubmitAttendeeName()}
-                  leftIcon={<ArrowForwardIcon />}
-                  colorScheme="yellow"
-                  variant="solid"
-                  ml="8"
-                >
-                  Transfer Money
-                </Button>
-              </HStack>
-            </Box>
+            {attending && (
+              <Box mt="5" mb="5">
+                <HStack ml="20">
+                  <Input
+                    placeholder="Attendee Name"
+                    w="40%"
+                    ml="4"
+                    value={attendeeName}
+                    onChange={(e) => SetAttendeeName(e.target.value)}
+                  ></Input>
+                  <Button
+                    onClick={() => handleSubmitAttendeeName()}
+                    leftIcon={<ArrowForwardIcon />}
+                    colorScheme="yellow"
+                    variant="solid"
+                    ml="8"
+                  >
+                    Transfer Money
+                  </Button>
+                </HStack>
+              </Box>
+            )}
           </Card>
         </Box>
       </div>
