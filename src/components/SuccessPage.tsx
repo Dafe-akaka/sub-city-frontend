@@ -28,7 +28,7 @@ export default function SuccessPage() {
       <Flex bg="black">
         <Flex>
           <Text fontSize="40px" color="black">
-            s
+            st
           </Text>
           <Flex
             position="fixed"
