@@ -34,7 +34,7 @@ export default function EventForm() {
       };
 
       const response = await fetch(
-        "https://obscure-river-76343.herokuapp.com/events",
+        `${process.env.REACT_APP_API_LOCATION_REMOTE}/events`,
         {
           method: "POST",
           headers: { "content-Type": "application/json" },
