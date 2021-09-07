@@ -43,12 +43,12 @@ export default function AttendeeDashboard() {
 
   const costPerPerson = (totalCost / numOfAttendees).toFixed(2);
 
-  const fetchLink = `https://obscure-river-76343.herokuapp.com/event-info/${id}`;
+  const fetchEventLink = `${process.env.REACT_APP_API_LOCATION}/event-info/${id}`;
 
   useEffect(() => {
     const getEvent = async () => {
       try {
-        const fetchEventInfo = await fetch(fetchLink);
+        const fetchEventInfo = await fetch(fetchEventLink);
         const jsonData: Event[] = await fetchEventInfo.json();
         const eventInfo: Event = jsonData[0];
 
@@ -64,7 +64,7 @@ export default function AttendeeDashboard() {
     };
 
     getEvent();
-  }, [fetchLink]);
+  }, [fetchEventLink]);
 
   const handleSubmitAttendeeName = async () => {
     function intoPennies(number: string) {
@@ -78,7 +78,7 @@ export default function AttendeeDashboard() {
     const body = { attendeeName, costInPennies };
 
     const sendAttendeeInfo = await fetch(
-      `${process.env.REACT_APP_API_LOCATION_REMOTE}/attendee/buy/${id}`,
+      `${process.env.REACT_APP_API_LOCATION}/attendee/buy/${id}`,
       {
         method: "POST",
         headers: { "content-Type": "application/json" },

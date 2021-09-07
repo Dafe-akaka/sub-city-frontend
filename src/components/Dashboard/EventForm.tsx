@@ -34,7 +34,7 @@ export default function EventForm() {
       };
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_LOCATION_REMOTE}/events`,
+        `${process.env.REACT_APP_API_LOCATION}/events`,
         {
           method: "POST",
           headers: { "content-Type": "application/json" },

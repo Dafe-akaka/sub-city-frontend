@@ -12,7 +12,7 @@ export default function SuccessPage() {
     const getEvent = async () => {
       try {
         const fetchEventInfo = await fetch(
-          `${process.env.REACT_APP_API_LOCATION_REMOTE}/order/success?session_id=${params.session_id}`
+          `${process.env.REACT_APP_API_LOCATION}/order/success?session_id=${params.session_id}`
         );
         const jsonData = await fetchEventInfo.text();
         setAttendant(jsonData);
@@ -21,7 +21,7 @@ export default function SuccessPage() {
       }
     };
     getEvent();
-  });
+  }, [params.session_id]);
 
   return (
     <div>
