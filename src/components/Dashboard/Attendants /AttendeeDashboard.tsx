@@ -39,6 +39,7 @@ export default function AttendeeDashboard() {
   const [totalCost, setTotalCost] = useState(0);
   const [description, setDescription] = useState("");
   const [timeOfEvent, setTimeOfEvent] = useState("");
+  const [attending, setAttending] = useState(false);
 
   const costPerPerson = (totalCost / numOfAttendees).toFixed(2);
 
@@ -66,8 +67,6 @@ export default function AttendeeDashboard() {
   }, [fetchLink]);
 
   const handleSubmitAttendeeName = async () => {
-    // e.preventDefault(); // we do not want it to refresh;
-
     function intoPennies(number: string) {
       let convertToString = number.replace(/[^a-zA-Z0-9]/g, "");
 
@@ -87,19 +86,26 @@ export default function AttendeeDashboard() {
       }
     );
     const redirect = await sendAttendeeInfo.text();
-    window.location.href = redirect;
+    window.location.href = redirect; // redirect to stripe
   };
-
-  console.log(costPerPerson);
 
   return (
     <div>
       <Flex bg="black">
-        <Flex bg="red"></Flex>
-        <Flex position="fixed" top="1rem" right="1rem" align="center" mt="-3">
-          <Text fontSize="40px" color="Red">
-            Sub-city
-          </Text>
+        <Flex>
+          <Text fontSize="40px">s</Text>
+          <Flex
+            position="fixed"
+            top="1rem"
+            right="1rem"
+            align="center"
+            mt="-4"
+            bg="black"
+          >
+            <Text fontSize="40px" color="Red">
+              Sub-city
+            </Text>
+          </Flex>
         </Flex>
       </Flex>
       <div
@@ -124,7 +130,14 @@ export default function AttendeeDashboard() {
               <Property label="Time" value={timeOfEvent} />
               <Property label="Description" value={description} />
               <HStack mt="4" ml="20">
-                <Checkbox colorScheme="green" size="lg" isInvalid mr="20%">
+                <Checkbox
+                  colorScheme="green"
+                  size="lg"
+                  isInvalid
+                  mr="20%"
+                  ischecked={attending}
+                  onChange={(e) => setAttending(e.target.checked)}
+                >
                   Attending Event
                 </Checkbox>
 
@@ -137,26 +150,28 @@ export default function AttendeeDashboard() {
                 </Text>
               </HStack>
             </CardContent>
-            <Box mt="5" mb="5">
-              <HStack ml="20">
-                <Input
-                  placeholder="Attendee Name"
-                  w="40%"
-                  ml="4"
-                  value={attendeeName}
-                  onChange={(e) => SetAttendeeName(e.target.value)}
-                ></Input>
-                <Button
-                  onClick={() => handleSubmitAttendeeName()}
-                  leftIcon={<ArrowForwardIcon />}
-                  colorScheme="yellow"
-                  variant="solid"
-                  ml="8"
-                >
-                  Transfer Money
-                </Button>
-              </HStack>
-            </Box>
+            {attending && (
+              <Box mt="5" mb="5">
+                <HStack ml="20">
+                  <Input
+                    placeholder="Attendee Name"
+                    w="40%"
+                    ml="4"
+                    value={attendeeName}
+                    onChange={(e) => SetAttendeeName(e.target.value)}
+                  ></Input>
+                  <Button
+                    onClick={() => handleSubmitAttendeeName()}
+                    leftIcon={<ArrowForwardIcon />}
+                    colorScheme="yellow"
+                    variant="solid"
+                    ml="8"
+                  >
+                    Transfer Money
+                  </Button>
+                </HStack>
+              </Box>
+            )}
           </Card>
         </Box>
       </div>

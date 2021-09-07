@@ -12,8 +12,7 @@ export const Dashboard = () => {
         </Flex>
         <Flex position="fixed" top="1rem" right="1rem" align="center" mt="-3">
           <Text fontSize="40px" color="Red">
-            {" "}
-            Sub-city{" "}
+            Sub-city
           </Text>
         </Flex>
       </Flex>

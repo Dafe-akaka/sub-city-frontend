@@ -22,7 +22,7 @@ export default function EventForm() {
   const history = useHistory();
 
   const onSubmitEvent = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // we do not want it to refresh
+    e.preventDefault();
     try {
       const body = {
         organiserName,
@@ -43,7 +43,6 @@ export default function EventForm() {
       );
 
       let idNumber = await response.text();
-      console.log(idNumber);
       history.push(`/attendee/${idNumber}`);
     } catch (err) {
       console.error(err.message);

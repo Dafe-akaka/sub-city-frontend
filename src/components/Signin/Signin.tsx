@@ -24,19 +24,14 @@ export default function Signin() {
     signInWithEmailAndPassword(auth, data.email, data.Password)
       .then(() => {
         // Signed in
-        //   const user = userCredential.user;
-        //use useHistory to direct to dashboard
-        setFirebaseErrorMessage("signed in");
+        setFirebaseErrorMessage("");
         history.push("/dashboard");
-        // ...
       })
       .catch((error) => {
         const errorMessage = error.message;
         setFirebaseErrorMessage(errorMessage);
-        // ..
       });
   };
-  console.log(firebaseErrorMessage);
 
   return (
     <Box
@@ -51,19 +46,15 @@ export default function Signin() {
       left="50%"
       display="flex"
     >
-      {/* /* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormLabel> Email</FormLabel>
-        {/* register your input into the hook by invoking the "register" function */}
         <Input placeholder="email" {...register("email", { required: true })} />
         <FormLabel mt="4"> Password</FormLabel>
-        {/* include validation with required or other standard HTML validation rules */}
         <Input
           placeholder="password"
           type="password"
           {...register("Password", { required: true })}
         />
-        {/* errors will return when field validation fails  */}
         {errors.Password && <span>This field is required</span>}
         <Button type="submit" colorScheme="green" mt="4">
           Submit

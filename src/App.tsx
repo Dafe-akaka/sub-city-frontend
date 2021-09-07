@@ -24,8 +24,6 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in
-        console.log("app.tsx signed in ");
         setCurrentUser(user);
       } else {
       }
