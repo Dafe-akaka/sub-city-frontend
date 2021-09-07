@@ -66,8 +66,6 @@ export default function AttendeeDashboard() {
   }, [fetchLink]);
 
   const handleSubmitAttendeeName = async () => {
-    // e.preventDefault(); // we do not want it to refresh;
-
     function intoPennies(number: string) {
       let convertToString = number.replace(/[^a-zA-Z0-9]/g, "");
 
@@ -87,19 +85,26 @@ export default function AttendeeDashboard() {
       }
     );
     const redirect = await sendAttendeeInfo.text();
-    window.location.href = redirect;
+    window.location.href = redirect; // redirect to stripe
   };
-
-  console.log(costPerPerson);
 
   return (
     <div>
       <Flex bg="black">
-        <Flex bg="red"></Flex>
-        <Flex position="fixed" top="1rem" right="1rem" align="center" mt="-3">
-          <Text fontSize="40px" color="Red">
-            Sub-city
-          </Text>
+        <Flex>
+          <Text fontSize="40px">s</Text>
+          <Flex
+            position="fixed"
+            top="1rem"
+            right="1rem"
+            align="center"
+            mt="-4"
+            bg="black"
+          >
+            <Text fontSize="40px" color="Red">
+              Sub-city
+            </Text>
+          </Flex>
         </Flex>
       </Flex>
       <div
