@@ -12,11 +12,8 @@ const Logout = () => {
       .then(() => {
         console.log("user is signed out");
         history.push("/signin");
-        // Sign-out successful.
       })
-      .catch((error) => {
-        // An error happened.
-      });
+      .catch((error) => {});
   };
 
   return (

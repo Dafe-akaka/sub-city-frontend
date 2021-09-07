@@ -78,7 +78,7 @@ export default function AttendeeDashboard() {
     const body = { attendeeName, costInPennies };
 
     const sendAttendeeInfo = await fetch(
-      `https://obscure-river-76343.herokuapp.com/attendee/buy/${id}`,
+      `${process.env.REACT_APP_API_LOCATION_REMOTE}/attendee/buy/${id}`,
       {
         method: "POST",
         headers: { "content-Type": "application/json" },
@@ -86,14 +86,16 @@ export default function AttendeeDashboard() {
       }
     );
     const redirect = await sendAttendeeInfo.text();
-    window.location.href = redirect; // redirect to stripe
+    window.location.href = redirect; //to stripe
   };
 
   return (
     <div>
       <Flex bg="black">
         <Flex>
-          <Text fontSize="40px">s</Text>
+          <Text fontSize="40px" color="black">
+            s
+          </Text>
           <Flex
             position="fixed"
             top="1rem"
