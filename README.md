@@ -46,7 +46,6 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-blah blah blah blah blah
 
 ### Built With
 
