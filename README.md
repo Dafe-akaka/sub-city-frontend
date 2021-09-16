@@ -6,14 +6,6 @@
 --
 
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-
-  <h3 align="center">sub-city!</h3>
-</p>
-
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -27,16 +19,11 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -44,40 +31,34 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+A full-stack web application, with user authentication (Firebase Auth service)
+and Stripe payment system, allows the user to plan custom events and
+distribute details and invitations between third parties via a link.
 
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 - [React](https://reactjs.org/)
 - [Node.js](https://nodejs.org/)
 - [ChakraUI](https://chakra-ui.com/)
-- [HTML] (https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/)
-- [Typescript] (https://www.typescriptlang.org)
-
+- [HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/)
+- [Typescript](https://www.typescriptlang.org)
+- [Firebase services](https://firebase.google.com)
+- [stripe](https://stripe.com/docs/api)
+ 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/Dafe-akaka/sub-city-frontend.git
    ```
 2. Install yarn packages
    ```sh
@@ -92,31 +73,17 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-netlify - (link)
+netlify - https://sub-city.netlify.app
 
 <!-- CONTACT -->
 
 ## Contact
 
-Your Name - [@mrshangguy](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: https://github.com/Dafe-akaka/sub-city-frontend/
 
 <!-- ACKNOWLEDGEMENTS -->
 
-## Acknowledgements
 
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Img Shields](https://shields.io)
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Pages](https://pages.github.com)
-- [Animate.css](https://daneden.github.io/animate.css)
-- [Loaders.css](https://connoratherton.com/loaders)
-- [Slick Carousel](https://kenwheeler.github.io/slick)
-- [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-- [Sticky Kit](http://leafo.net/sticky-kit)
-- [JVectorMap](http://jvectormap.com)
-- [Font Awesome](https://fontawesome.com)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
