@@ -40,15 +40,14 @@ export default function Signup() {
   return (
     <Box
       boxShadow="dark-lg"
-      mt="300px"
-      ml="-150px"
       p="8"
       rounded="md"
       bg="white"
-      pos="absolute"
+      pos="fixed"
       top="50%"
       left="50%"
       display="flex"
+      transform="translate(-50%,-50%)"
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormLabel> Email</FormLabel>

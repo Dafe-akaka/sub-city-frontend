@@ -1,4 +1,4 @@
-import { Button, Box } from "@chakra-ui/react";
+import { Button} from "@chakra-ui/react";
 import { signOut } from "firebase/auth";
 import { auth } from "../../App";
 import { useHistory } from "react-router-dom";
@@ -17,19 +17,19 @@ const Logout = () => {
   };
 
   return (
-    <Box>
+    <div >
       <Button
         variant="ghost"
         mb={2}
         onClick={handleSignout}
         type="button"
-        colorScheme="red"
-        mt="4"
+        colorScheme="black"
+        mt="3"
         size="lg"
       >
         Logout
       </Button>
-    </Box>
+    </div>
   );
 };
 

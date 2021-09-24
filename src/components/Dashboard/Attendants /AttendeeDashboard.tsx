@@ -9,6 +9,7 @@ import {
   Box,
   useColorModeValue,
   Flex,
+  Center,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Card } from "./Card";
@@ -91,24 +92,12 @@ export default function AttendeeDashboard() {
 
   return (
     <div>
-      <Flex bg="black">
-        <Flex>
+      <Flex bg="gray.300">
+        <Box top="1rem" right="1rem" align="center" mt="2">
           <Text fontSize="40px" color="black">
-            s
+            Sub-city
           </Text>
-          <Flex
-            position="fixed"
-            top="1rem"
-            right="1rem"
-            align="center"
-            mt="-4"
-            bg="black"
-          >
-            <Text fontSize="40px" color="Red">
-              Sub-city
-            </Text>
-          </Flex>
-        </Flex>
+        </Box>
       </Flex>
       <div
         style={{
@@ -131,34 +120,36 @@ export default function AttendeeDashboard() {
               <Property label="Date" value={dateOfEvent?.slice(0, 10)} />
               <Property label="Time" value={timeOfEvent} />
               <Property label="Description" value={description} />
-              <HStack mt="4" ml="20">
-                <Checkbox
-                  colorScheme="green"
-                  size="lg"
-                  isInvalid
-                  mr="20%"
-                  ischecked={attending}
-                  onChange={(e) => setAttending(e.target.checked)}
-                >
-                  Attending Event
-                </Checkbox>
+              <Center>
+                <HStack p= "4">
+                  <Checkbox
+                    colorScheme="green"
+                    size="md"
+                    mr= "5"
+                    isInvalid
+                    ischecked={attending}
+                    onChange={(e) => setAttending(e.target.checked)}
+                  >
+                    Attending Event
+                  </Checkbox>
 
-                <Text fontSize="xl" ml="7">
-                  Cost:
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "GBP",
-                  }).format(Number(costPerPerson))}
-                </Text>
-              </HStack>
+                  <Text fontSize="l" ml="7">
+                    Cost:
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "GBP",
+                    }).format(Number(costPerPerson))}
+                  </Text>
+                </HStack>
+              </Center>
             </CardContent>
             {attending && (
-              <Box mt="5" mb="5">
-                <HStack ml="20">
+              <Center>
+                <HStack p="7">
                   <Input
                     placeholder="Attendee Name"
-                    w="40%"
-                    ml="4"
+                    w="50%"
+                    ml="2"
                     value={attendeeName}
                     onChange={(e) => SetAttendeeName(e.target.value)}
                   ></Input>
@@ -172,7 +163,7 @@ export default function AttendeeDashboard() {
                     Transfer Money
                   </Button>
                 </HStack>
-              </Box>
+              </Center>
             )}
           </Card>
         </Box>

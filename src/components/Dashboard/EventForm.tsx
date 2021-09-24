@@ -103,7 +103,7 @@ export default function EventForm() {
             </InputGroup>
           </HStack>
           <HStack>
-            <InputGroup ml="-2">
+            <InputGroup>
               <InputLeftElement
                 pointerEvents="none"
                 color="gray.300"
@@ -112,7 +112,7 @@ export default function EventForm() {
               />
               <Input
                 placeholder="Total Cost"
-                w="40%"
+                w="50%"
                 value={totalCost}
                 onChange={(e) => setTotalCost(e.target.value)}
               />

@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, Box } from "@chakra-ui/react";
 import React from "react";
 import { useEffect, useState } from "react";
 
@@ -25,24 +25,12 @@ export default function SuccessPage() {
 
   return (
     <div>
-      <Flex bg="black">
-        <Flex>
+     <Flex bg="gray.300">
+        <Box top="1rem" right="1rem" align="center" mt="2">
           <Text fontSize="40px" color="black">
-            st
+            Sub-city
           </Text>
-          <Flex
-            position="fixed"
-            top="1rem"
-            right="1rem"
-            align="center"
-            mt="-4"
-            bg="black"
-          >
-            <Text fontSize="40px" color="Red">
-              Sub-city
-            </Text>
-          </Flex>
-        </Flex>
+        </Box>
       </Flex>
       <div
         style={{
