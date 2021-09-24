@@ -121,11 +121,11 @@ export default function AttendeeDashboard() {
               <Property label="Time" value={timeOfEvent} />
               <Property label="Description" value={description} />
               <Center>
-                <HStack p= "4">
+                <HStack p="4">
                   <Checkbox
                     colorScheme="green"
                     size="md"
-                    mr= "5"
+                    mr="5"
                     isInvalid
                     ischecked={attending}
                     onChange={(e) => setAttending(e.target.checked)}

@@ -25,7 +25,7 @@ export default function SuccessPage() {
 
   return (
     <div>
-     <Flex bg="gray.300">
+      <Flex bg="gray.300">
         <Box top="1rem" right="1rem" align="center" mt="2">
           <Text fontSize="40px" color="black">
             Sub-city
